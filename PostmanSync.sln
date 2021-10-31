@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{F34C26F3-DD80-426D-BFC2-AF911AE363D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stadion.PostmanSync", "src\Stadion.PostmanSync\Stadion.PostmanSync.csproj", "{E43D8E94-864C-4BE8-B205-FF59AF63D77D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StadionHQ.PostmanSync", "src\StadionHQ.PostmanSync\StadionHQ.PostmanSync.csproj", "{E43D8E94-864C-4BE8-B205-FF59AF63D77D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stadion.PostmanSync.DevApi", "src\Stadion.PostmanSync.DevApi\Stadion.PostmanSync.DevApi.csproj", "{A6C38269-4C5E-4E29-B267-E63448569CF1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StadionHQ.PostmanSync.DevApi", "src\StadionHQ.PostmanSync.DevApi\StadionHQ.PostmanSync.DevApi.csproj", "{A6C38269-4C5E-4E29-B267-E63448569CF1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{ED128150-DA55-4AD6-BAFE-B5B89CC4087F}"
 	ProjectSection(SolutionItems) = preProject
