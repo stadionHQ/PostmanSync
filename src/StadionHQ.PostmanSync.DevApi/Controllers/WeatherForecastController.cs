@@ -29,4 +29,10 @@ public class WeatherForecastController : ControllerBase
         })
             .ToArray();
     }
+
+    [HttpPost]
+    public IActionResult Post()
+    {
+        return Ok("You can't predict the weather");
+    }
 }

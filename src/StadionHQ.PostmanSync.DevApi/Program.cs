@@ -15,12 +15,20 @@ builder.Host.ConfigureAppConfiguration((hostingContext, config) =>
 
 // Add services to the container.
 
+#if DEBUG
 builder.Services.AddPostmanSync(builder.Configuration);
+#endif
 
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo {Title = "StadionHQ.PostmanSync.DevApi", Version = "v1"});
+    c.SwaggerDoc("v1", new OpenApiInfo {Title = "Postman Sync Demo", Version = "v1"});
+    
+    c.AddServer(new OpenApiServer
+    {
+        Url = "https://localhost:7038",
+        Description = "Development"
+    });
 });
 
 var app = builder.Build();
