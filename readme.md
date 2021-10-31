@@ -10,6 +10,9 @@ Make your changes, run your app, and test your endpoints instantly using the Pos
 - No more manually updating you postman whenever something changes in your code.
 - No more broken / out of date postman collections.
 
+## See it in action
+Note - seems a bit slower due to gif frame rate.
+
 ![Example](readme/images/example-flow.gif)
 
 ## Getting Started
