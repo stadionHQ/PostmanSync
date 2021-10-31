@@ -1,3 +1,4 @@
+using Microsoft.OpenApi.Models;
 using Stadion.PostmanSync.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,7 +20,7 @@ builder.Services.AddPostmanSync(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new() {Title = "Stadion.PostmanSync.DevApi", Version = "v1"});
+    c.SwaggerDoc("v1", new OpenApiInfo {Title = "Stadion.PostmanSync.DevApi", Version = "v1"});
 });
 
 var app = builder.Build();

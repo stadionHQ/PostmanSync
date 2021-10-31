@@ -11,7 +11,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\src\Stadion.PostmanSync\Stadion.PostmanSync.csproj" />
+      <ProjectReference Include="..\Stadion.PostmanSync\Stadion.PostmanSync.csproj" />
     </ItemGroup>
-
 </Project>
