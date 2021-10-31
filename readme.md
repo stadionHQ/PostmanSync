@@ -13,7 +13,7 @@ Make your changes, run your app, and test your endpoints instantly using the Pos
 ## See it in action
 Note - seems a bit slower due to gif frame rate.
 
-![Example](readme/images/example-flow.gif)
+![Example](https://github.com/stadionHQ/PostmanSync/blob/main/readme/images/example-flow.gif?raw=true)
 
 ## Getting Started
 
