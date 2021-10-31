@@ -48,9 +48,10 @@ dotnet add package StadionHQ.PostmanSync
 ## Publishing
 From the root of the repo.
 
-```sql
+```bash
 cd src/Stadion.PostmanSync
 dotnet pack
 cd bin/Debug
+dotnet nuget push StadionHQ.PostmanSync.<VERSION>.nupkg --api-key <API_KEY> --source https://api.nuget.org/v3/index.json
 
 ```
