@@ -30,9 +30,21 @@ public class WeatherForecastController : ControllerBase
             .ToArray();
     }
 
-    [HttpPost]
-    public IActionResult Post()
-    {
-        return Ok("You can't predict the weather");
-    }
+     [HttpPost]
+     public IActionResult Post()
+     {
+         return BadRequest("Only accepting rain.");
+     }
+     
+     [HttpDelete]
+     public IActionResult Delete()
+     {
+         return Ok("Try moving to Western Australia.");
+     }
+     
+     [HttpPut]
+     public IActionResult Update()
+     {
+         return Ok("Maybe buy an umbrella instead.");
+     }
 }

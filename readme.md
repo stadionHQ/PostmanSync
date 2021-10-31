@@ -5,9 +5,12 @@ This is a .NET local development tool that syncs your API's schema definition (s
 
 Changes made in code to your APIs are instantly available in your Postman app as soon as your .NET core API finishes launching.
 
-No more manually updating you postman whenever something changes in your code. Make your changes, run your app, and test your endpoints instantly using the Postman GUI.
+Make your changes, run your app, and test your endpoints instantly using the Postman GUI.
 
-![Example](readme/images/example.gif)
+- No more manually updating you postman whenever something changes in your code.
+- No more broken / out of date postman collections.
+
+![Example](readme/images/example-flow.gif)
 
 ## Getting Started
 
