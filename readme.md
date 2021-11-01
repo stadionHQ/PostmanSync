@@ -8,11 +8,12 @@ Changes made in code to your APIs are instantly available in your Postman app as
 
 Make your changes, run your app, and test your endpoints instantly using the Postman GUI.
 
-- No more manually updating you postman whenever something changes in your code.
+- No more manually updating you postman collections whenever something changes in your code.
 - No more broken / out of date postman collections.
+- Keep your documentation and test collections in sync at all times with one simple process.
 
 ## See it in action
-Note - seems a bit slower due to gif frame rate.
+> TODO - The GIF makes it feel much slower than normal to update. Need better frame rate
 
 ![Example](https://github.com/stadionHQ/PostmanSync/blob/main/readme/images/example-flow.gif?raw=true)
 
@@ -31,17 +32,22 @@ dotnet add package StadionHQ.PostmanSync
 
 ### 2. Configure Postman Sync
 
-This is where you tell Postman Sync where to sync your APIs schema.
+> TODO - Need to add more detailed documentation for each property in the configuration structure. Also need better examples of finding the required ids in Postman.
 
-Postman Sync provides you the ability to pin point the exact Postman items you want to sync your schema to. In a generic development workflow, you might fork the "primary" api collection in postman, then use the ids for that forked collection with Postman Sync.
+This is where you tell Postman Sync where to sync your local API schema into Postman.
 
-Here's an example configuration for Postman Sync's own Postman API which is managed in the [Postman Sync Workspace](https://www.postman.com/stadionapis/workspace/postman-swagger-sync/overview).
+All the information required to sync an API schema is captured inside a `Profile` configuration object. Each profile is effectively a collection of Postman object ids that tell PostmanSync exactly which Postman objects need to be updated. This is powerful, because it means that individual developers can set their own ids, only updating their own resources till changes are ready to be merged.
+
+Below is an example configuration for Postman Sync's own Postman API which is managed in the [Postman Sync Workspace](https://www.postman.com/stadionapis/workspace/postman-swagger-sync/overview).
 
 This configuration will update the definition of our ["draft" version](https://www.postman.com/stadionapis/workspace/postman-swagger-sync/api/acc66f3c-05a6-437c-a019-34f76b07b607/version/51713c9f-f9f0-4b5a-b447-f6a28c07c6e7) in the "Postman Sync Demo" API.
 
-It also has specified to sync changes through to the [documentation collection](https://www.postman.com/stadionapis/workspace/postman-swagger-sync/collection/8423190-1d8b581d-bc6d-44c9-bccf-b604d9c5e033?ctx=documentation) relation, once the schema of the api version has been updated.
+As mentioned, your documentation and test collections are just relations connected to the API "container". Once the schema has been updated for that API, we can sync the changes automatically to any number of relations.
 
-Later, you could choose to add other relations so that test collections, for example, are updated.
+The `SourceSchema` property defines what type of schema source you are syncing to Postman, and where it is (i.e the URL).
+
+The example below specifies a [documentation collection](https://www.postman.com/stadionapis/workspace/postman-swagger-sync/collection/8423190-1d8b581d-bc6d-44c9-bccf-b604d9c5e033?ctx=documentation) relation. This collection will be automatically updated as part of the sync process. Any other possible relations will not be updated, because they have not been specified.
+
 
 ```json
 {
@@ -66,6 +72,9 @@ Later, you could choose to add other relations so that test collections, for exa
 }
 ```
 Note that most of these ids you can get straight from the Postman GUI. However, for the relations, you'll need to call the `https://api.getpostman.com/apis/:apiId` endpoint with your api id in order to find out the relations ids.
+
+#### Multiple profiles
+We've built to allow syncing multiple profiles, but in reality it's unlikely it will be needed. After all, a single API only runs in a process in .NET Core, so logically doesn't quite make sense to have multiple profiles configured. This may be removed in the future.
 
 ### 3. Add Postman Sync to startup
 The following is an example using .NET 6
