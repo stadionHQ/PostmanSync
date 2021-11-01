@@ -7,8 +7,9 @@ Changes made in code to your APIs are instantly available in your Postman app as
 
 Make your changes, run your app, and test your endpoints instantly using the Postman GUI.
 
-- No more manually updating you postman whenever something changes in your code.
+- No more manually updating you postman collections whenever something changes in your code.
 - No more broken / out of date postman collections.
+- Keep your documentation and test collections in sync at all times with one simple process.
 
 ## See it in action
 Note - seems a bit slower due to gif frame rate.
