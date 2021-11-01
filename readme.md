@@ -1,5 +1,6 @@
 # Postman Sync (BETA)
 [![Maintenance](https://img.shields.io/nuget/v/StadionHQ.PostmanSync)](https://www.nuget.org/packages/StadionHQ.PostmanSync/)
+![example workflow](https://github.com/stadionHQ/PostmanSync/actions/workflows/dotnet.yml/badge.svg)
 
 This is a .NET local development tool that syncs your API's schema definition (such as Open API) automatically with your postman collection, during the start up of your app.
 
