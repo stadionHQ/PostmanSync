@@ -134,20 +134,7 @@ Make changes to your API, run the app, and all configured correctly, your Postma
 ### Logging
 You can see in your console logs the status of Postman Sync during startup.
 
-```bash
-info: Stadion.PostmanSync.PostmanSyncManager[0]
-      Postman Sync has started
-info: Stadion.PostmanSync.PostmanSyncManager[0]
-      Processing profile 'PostmanSyncDemo/draft/openapi3'
-info: Stadion.PostmanSync.PostmanSyncManager[0]
-      Updated the api schema for profile 'PostmanSyncDemo/draft/openapi3'
-info: Stadion.PostmanSync.PostmanSyncManager[0]
-      Syncing Postman api schema updates to relation documentation/7a889850-ae7c-440d-8a32-7266077495e6
-info: Stadion.PostmanSync.PostmanSyncManager[0]
-      Syncing the relation has finished.
-info: Microsoft.Hosting.Lifetime[0]
-      Application started. Press Ctrl+C to shut down.
-```
+![image-20211102120304488](readme/images/logs.png)
 
 ### Exceptions
 Postman Sync specific exceptions will be thrown if things go wrong (such as Postman API request errors). As this is a development workflow, we think this is ok, though later may look to improve this.

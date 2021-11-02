@@ -52,7 +52,7 @@ public class PostmanSyncManager: IPostmanSyncManager
         {
             await ProcessProfileAsync(profile);
         }
-        logger.LogInformation("Postman Sync has finished");
+        logger.LogInformation("✅ Postman Sync has finished");
         logger.LogInformation("");
     }
 

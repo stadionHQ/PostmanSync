@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
-        <!-- Required elements-->
         <id>StadionHQ.PostmanSync</id>
-        <version>1.0.5</version>
+        <version>1.0.7</version>
         <description>A .NET tool that syncs API specs automatically to Postman during startup.</description>
         <authors>Stadion Ltd</authors>
         <projectUrl>https://github.com/stadionHQ/PostmanSync</projectUrl>
+        <license type="expression">MIT</license>
     </metadata>
 </package>
