@@ -139,6 +139,10 @@ You can see in your console logs the status of Postman Sync during startup.
 ### Exceptions
 Postman Sync specific exceptions will be thrown if things go wrong (such as Postman API request errors). As this is a development workflow, we think this is ok, though later may look to improve this.
 
+You'll see thes in the logs, with hopefully enough detail to diagnose what's happened. We surfacing Postman API error messages in the exception message
+
+![image-20211102125628465](readme/images/image-20211102125628465.png)
+
 
 ## Example workflow
 
