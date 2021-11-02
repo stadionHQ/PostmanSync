@@ -76,6 +76,25 @@ Note that most of these ids you can get straight from the Postman GUI. However, 
 #### Multiple profiles
 We've built to allow syncing multiple profiles, but in reality it's unlikely it will be needed. After all, a single API only runs in a process in .NET Core, so logically doesn't quite make sense to have multiple profiles configured. This may be removed in the future.
 
+#### Local configuration
+It can be beneficial to create local git ignored configuration per developer to:
+- Prevent the Postman api credentials being committed
+- Prevent developers overwriting each others local setup / syncing to the wrong apis / etc
+
+This can be achieved quite simply with this
+
+```c#
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.ConfigureAppConfiguration((hostingContext, config) =>
+{
+    if (hostingContext.HostingEnvironment.IsDevelopment())
+    {
+        config.AddJsonFile("appsettings.Local.json", true, true);
+    }
+});
+```
+
 ### 3. Add Postman Sync to startup
 The following is an example using .NET 6
 
