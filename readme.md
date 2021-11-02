@@ -141,6 +141,36 @@ Postman Sync specific exceptions will be thrown if things go wrong (such as Post
 - Change code, test in Postman against the fork
 - When finished, merge the fork back into the main postman collection using Postman pull requests.
 
+## Development
+- You can develop PostmanSync directly against the included api `StadionHQ.PostmanSync.DevApi`
+
+### Using nuget locally
+- If you'd like to develop with PostmanSync locally in your own project, you can include the project's output directory as a nuget source.
+- Find your local nuget.config file
+  - On macOS, usually at at `/Users/<YOU>/.nuget/NuGet/NuGet.Config`
+- Add a package source entry to where you've added PostmanSync's repo
+
+```xml
+<add key="PostmanSync Local" value="<YOUR_DEV_FOLDER>/PostmanSync/src/StadionHQ.PostmanSync/bin/Debug" />
+```
+
+Here's mine on macOS, for example:
+
+```bash
+cat /Users/chrispaynter/.nuget/NuGet/NuGet.Config 
+```
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <packageSources>
+    <add key="nuget.org" value="https://api.nuget.org/v3/index.json" protocolVersion="3" />
+    <add key="PostmanSync Local" value="/Users/chrispaynter/Development/stadion/PostmanSync/src/StadionHQ.PostmanSync/bin/Debug" />
+  </packageSources>
+</configuration>
+```
+
+Here's some [further information](https://stackoverflow.com/a/44463578/518341) if you need help.
+
 ## Publishing
 From the root of the repo.
 
@@ -149,5 +179,4 @@ cd src/Stadion.PostmanSync
 dotnet pack
 cd bin/Debug
 dotnet nuget push StadionHQ.PostmanSync.<VERSION>.nupkg --api-key <API_KEY> --source https://api.nuget.org/v3/index.json
-
 ```
