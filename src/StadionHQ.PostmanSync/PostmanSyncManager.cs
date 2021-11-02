@@ -41,11 +41,19 @@ public class PostmanSyncManager: IPostmanSyncManager
     /// </summary>
     public async Task RunAsync()
     {
+        Console.WriteLine("   ___          _                           __                  ");
+        Console.WriteLine(@"  / _ \___  ___| |_ _ __ ___   __ _ _ __   / _\_   _ _ __   ___ ");
+        Console.WriteLine(@" / /_)/ _ \/ __| __| '_ ` _ \ / _` | '_ \  \ \| | | | '_ \ / __|");
+        Console.WriteLine(@"/ ___/ (_) \__ \ |_| | | | | | (_| | | | | _\ \ |_| | | | | (__ ");
+        Console.WriteLine(@"\/    \___/|___/\__|_| |_| |_|\__,_|_| |_| \__/\__, |_| |_|\___|");
+        Console.WriteLine(@"                                               |___/");
         logger.LogInformation("Postman Sync has started");
         foreach (var profile in options.Profiles)
         {
             await ProcessProfileAsync(profile);
         }
+        logger.LogInformation("Postman Sync has finished");
+        logger.LogInformation("");
     }
 
     public async Task ProcessProfileAsync(PostmanSyncProfile profile)
@@ -69,10 +77,11 @@ public class PostmanSyncManager: IPostmanSyncManager
 
         await UpdateApiSchemaAsync(profile, schemaContent);
 
-        logger.LogInformation($"Uupdated the api schema for profile '{profile.Key}'");
+        logger.LogInformation($"Updated the api schema for profile '{profile.Key}'");
         
         foreach (var relation in profile.Relations)
         {
+            // These could be run in parallel
             await SyncApiSchemaToCollection(profile.ApiId, profile.VersionId, relation);
         }
     }

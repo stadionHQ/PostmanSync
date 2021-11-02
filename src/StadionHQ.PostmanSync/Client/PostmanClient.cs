@@ -93,7 +93,7 @@ public class PostmanClient
             if(response.StatusCode is HttpStatusCode.BadRequest or HttpStatusCode.NotFound)
             {
                 var errorResult = JsonSerializer.Deserialize<PostmanErrorResponse>(response.Content, jsonSerializerOptions);
-                throw new PostmanException("Bad request", errorResult?.Error);
+                throw new PostmanException($"Bad request from post man: {errorResult?.Error.Name} - {errorResult?.Error.Message}", errorResult?.Error);
             }
 
             throw new PostmanException("Unexpected response from Postman server", response.Content);

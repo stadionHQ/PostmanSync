@@ -140,7 +140,7 @@ info: Stadion.PostmanSync.PostmanSyncManager[0]
 info: Stadion.PostmanSync.PostmanSyncManager[0]
       Processing profile 'PostmanSyncDemo/draft/openapi3'
 info: Stadion.PostmanSync.PostmanSyncManager[0]
-      Uupdated the api schema for profile 'PostmanSyncDemo/draft/openapi3'
+      Updated the api schema for profile 'PostmanSyncDemo/draft/openapi3'
 info: Stadion.PostmanSync.PostmanSyncManager[0]
       Syncing Postman api schema updates to relation documentation/7a889850-ae7c-440d-8a32-7266077495e6
 info: Stadion.PostmanSync.PostmanSyncManager[0]
