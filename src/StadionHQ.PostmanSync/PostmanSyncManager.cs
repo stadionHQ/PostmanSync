@@ -31,7 +31,7 @@ public class PostmanSyncManager: IPostmanSyncManager
         this.options = options.Value;
         AssertUniqueKeys();
 
-        client = new PostmanClient(options.Value.PostmanApiKey);
+        client = new PostmanClient(options.Value.PostmanApiKey, logger);
         this.logger = logger;
     }
 

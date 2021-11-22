@@ -10,6 +10,7 @@ namespace Stadion.PostmanSync.Client;
 public class PostmanClient
 {
     private readonly string apiKey;
+    private readonly ILogger logger;
     private readonly RestClient client;
 
     private readonly JsonSerializerOptions jsonSerializerOptions = new()
@@ -17,9 +18,10 @@ public class PostmanClient
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
     };
     
-    public PostmanClient(string apiKey)
+    public PostmanClient(string apiKey, ILogger logger)
     {
         this.apiKey = apiKey;
+        this.logger = logger;
         client = new RestClient("https://api.getpostman.com")
         {
             Timeout = -1
@@ -64,8 +66,9 @@ public class PostmanClient
         string entityType,
         string entityId)
     {
-        return await MakeRequestAsync<SyncRelationsWithSchemaResponse>(
-            $"apis/{apiId}/versions/{apiVersionId}/{entityType}/{entityId}/syncWithSchema", Method.PUT);
+        var url = $"apis/{apiId}/versions/{apiVersionId}/{entityType}/{entityId}/syncWithSchema";
+        logger.LogTrace($"Sending to url: {url}");
+        return await MakeRequestAsync<SyncRelationsWithSchemaResponse>(url, Method.PUT);
     }
     
 
@@ -93,7 +96,7 @@ public class PostmanClient
             if(response.StatusCode is HttpStatusCode.BadRequest or HttpStatusCode.NotFound)
             {
                 var errorResult = JsonSerializer.Deserialize<PostmanErrorResponse>(response.Content, jsonSerializerOptions);
-                throw new PostmanException($"Bad request from post man: {errorResult?.Error.Name} - {errorResult?.Error.Message}", errorResult?.Error);
+                throw new PostmanException($"Postman response is {response.StatusCode}: {errorResult?.Error.Name} - {errorResult?.Error.Message}", errorResult?.Error);
             }
 
             throw new PostmanException("Unexpected response from Postman server", response.Content);

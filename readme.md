@@ -136,6 +136,8 @@ You can see in your console logs the status of Postman Sync during startup.
 
 ![image-20211102120304488](readme/images/logs.png)
 
+To debug issues with PostmanSync, you can set your logging level to `trace` for extra information. 
+
 ### Exceptions
 Postman Sync specific exceptions will be thrown if things go wrong (such as Postman API request errors). As this is a development workflow, we think this is ok, though later may look to improve this.
 
