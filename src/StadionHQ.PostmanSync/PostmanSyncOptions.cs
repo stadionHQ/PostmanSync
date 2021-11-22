@@ -11,6 +11,7 @@ public class PostmanSyncSourceSchema
     public string Url { get; set; }
 }
 
+
 /// <summary>
 /// Models an Postman API that will be synced automatically.
 /// </summary>
@@ -35,10 +36,31 @@ public class PostmanSyncProfile
     /// </summary>
     public IEnumerable<PostmanSyncRelation> Relations { get; set; }
 }
+
+public class PostmanSyncHostedServiceOptions
+{
+    /// <summary>
+    /// Enable or disable the hosted service from running
+    /// </summary>
+    public bool Enabled { get; set; }
+    
+    /// <summary>
+    /// If true, will allow the hosted service to raise exceptions that occur
+    /// during the sync on startup. This will cause the .NET core host to crash
+    /// when postman syncing fails. To prevent this, set this to false.
+    /// </summary>
+    public bool ThrowExceptions { get; set; }
+}
+
+
 public class PostmanSyncOptions
 {
     public const string PostmanSync = "PostmanSync";
     public string PostmanApiKey { get; set; }
     public IEnumerable<PostmanSyncProfile> Profiles { get; set; }
 
+    /// <summary>
+    /// Configuration to enable a hosted service to be installed which will automatically run postman sync on startup
+    /// </summary>
+    public PostmanSyncHostedServiceOptions? HostedService { get; set; }
 }

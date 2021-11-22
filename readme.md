@@ -67,7 +67,11 @@ The example below specifies a [documentation collection](https://www.postman.com
         "Language": "json",
         "Url": "https://localhost:7038/swagger/v1/swagger.json"
       }
-    }]
+    }],
+    "HostedService": {
+      "Enabled": "true",
+      "ThrowExceptions": "false"
+    }
   }
 }
 ```
