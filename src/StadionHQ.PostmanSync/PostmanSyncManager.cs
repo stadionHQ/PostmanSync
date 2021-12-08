@@ -67,6 +67,7 @@ public class PostmanSyncManager: IPostmanSyncManager
             throw new PostmanSyncException($"Source Schema is missing from profile: {JsonSerializer.Serialize(profile)}");
         }
         
+        // Need to add polly here until it works
         var schemaContent = await FetchSource(sourceSchema.Url);
 
         if (string.IsNullOrEmpty(schemaContent))
@@ -116,11 +117,18 @@ public class PostmanSyncManager: IPostmanSyncManager
     /// </summary>
     private async Task<string> FetchSource(string url)
     {
-        using var webClient = new HttpClient();
-        var response = await webClient.GetAsync(url);
-        response.EnsureSuccessStatusCode();
-        var s = await response.Content.ReadAsStringAsync();
-        return s;
+        try
+        {
+            using var webClient = new HttpClient();
+            var response = await webClient.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+            var s = await response.Content.ReadAsStringAsync();
+            return s;
+        }
+        catch (Exception e)
+        {
+            throw new FetchApiDefinitionException("Could not fetch API definition source", e);
+        }
     }
     
     /// <summary>
@@ -132,7 +140,7 @@ public class PostmanSyncManager: IPostmanSyncManager
         var allProfileKeys = options.Profiles.Select(u => u.Key);
         var profileKeys = allProfileKeys as string[] ?? allProfileKeys.ToArray();
         var distinctKeys = profileKeys.Distinct();
-        if (profileKeys.Count() != distinctKeys.Count())
+        if (profileKeys.Length != distinctKeys.Count())
         {
             throw new PostmanSyncException("PostmanSync configuration contains profiles with duplicate keys");
         }

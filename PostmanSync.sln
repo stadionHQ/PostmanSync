@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 		readme.md = readme.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHostedService", "TestHostedService\TestHostedService.csproj", "{971650AB-BB7E-4972-9507-79CECB2940A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{E43D8E94-864C-4BE8-B205-FF59AF63D77D} = {F34C26F3-DD80-426D-BFC2-AF911AE363D1}
 		{A6C38269-4C5E-4E29-B267-E63448569CF1} = {F34C26F3-DD80-426D-BFC2-AF911AE363D1}
+		{971650AB-BB7E-4972-9507-79CECB2940A4} = {F34C26F3-DD80-426D-BFC2-AF911AE363D1}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{E43D8E94-864C-4BE8-B205-FF59AF63D77D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -35,5 +38,9 @@ Global
 		{A6C38269-4C5E-4E29-B267-E63448569CF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6C38269-4C5E-4E29-B267-E63448569CF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6C38269-4C5E-4E29-B267-E63448569CF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{971650AB-BB7E-4972-9507-79CECB2940A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{971650AB-BB7E-4972-9507-79CECB2940A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{971650AB-BB7E-4972-9507-79CECB2940A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{971650AB-BB7E-4972-9507-79CECB2940A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
