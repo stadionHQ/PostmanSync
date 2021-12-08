@@ -88,25 +88,26 @@ public class PostmanClient
         var response = await client.ExecuteAsync(request);
         if (response == null)
         {
-            throw new PostmanException("Response was null");
+            throw new UnexpectedPostmanResponseException("Response was null");
         }
 
         if (!response.IsSuccessful)
         {
             if(response.StatusCode is HttpStatusCode.BadRequest or HttpStatusCode.NotFound)
             {
-                var errorResult = JsonSerializer.Deserialize<PostmanErrorResponse>(response.Content, jsonSerializerOptions);
-                throw new PostmanException($"Postman response is {response.StatusCode}: {errorResult?.Error.Name} - {errorResult?.Error.Message}", errorResult?.Error);
+                // var errorResult = JsonSerializer.Deserialize<PostmanErrorResponse>(response.Content, jsonSerializerOptions);
+                throw new UnexpectedPostmanResponseException("Non OK status code", response.Content, response.StatusCode);
+                // throw new PostmanClientException($"Postman response is {response.StatusCode}: {errorResult?.Error.Name} - {errorResult?.Error.Message}", errorResult?.Error);
             }
 
-            throw new PostmanException("Unexpected response from Postman server", response.Content);
+            throw new UnexpectedPostmanResponseException("Unexpected response from Postman server", response.Content, response.StatusCode);
         }
 
         var result = JsonSerializer.Deserialize<T>(response.Content, jsonSerializerOptions);
 
         if (result == null)
         {
-            throw new PostmanException("Deserialized response was null", response.Content);
+            throw new UnexpectedPostmanResponseException("Deserialized response was null", response.Content, response.StatusCode);
         }
 
         return result;

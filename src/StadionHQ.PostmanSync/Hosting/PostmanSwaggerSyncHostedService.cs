@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Options;
+using Stadion.PostmanSync.Client;
 
 namespace Stadion.PostmanSync.Hosting;
 
@@ -37,15 +38,27 @@ public class PostmanSyncHostedService : IHostedService
             {
                 await syncManager.RunAsync();
             }
-            catch (Exception e)
+            catch (UnexpectedPostmanResponseException e)
             {
+                Console.WriteLine($"Unexpected response from Postman with status code {e.ResponseStatusCode}");
+                Console.WriteLine(e.ResponseContent);
+                
                 if (options.Value.HostedService.ThrowExceptions)
                 {
                     throw;
                 }
-            
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("An unexpected exception was encountered whilst running Postman Sync");
+                if (options.Value.HostedService.ThrowExceptions)
+                {
+                    throw;
+                }
+                
                 Console.WriteLine(e);
-                Console.WriteLine("Postman Sync manager has thrown an exception. The hosted service has been configured to ignore exceptions.");
+                Console.WriteLine(
+                    "Postman Sync manager has thrown an exception. The hosted service has been configured to ignore exceptions.");
             }
         });
     }

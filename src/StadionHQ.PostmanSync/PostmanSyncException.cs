@@ -6,3 +6,8 @@ public class PostmanSyncException: Exception
     {
     }
 }
+
+public class PostmanApiCallException : Exception
+{
+    
+}
