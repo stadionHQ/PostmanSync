@@ -67,7 +67,7 @@ public class PostmanSyncManager: IPostmanSyncManager
             throw new PostmanSyncException($"Source Schema is missing from profile: {JsonSerializer.Serialize(profile)}");
         }
         
-        var schemaContent = FetchContentString(sourceSchema.Url);
+        var schemaContent = await FetchSource(sourceSchema.Url);
 
         if (string.IsNullOrEmpty(schemaContent))
         {
@@ -114,10 +114,12 @@ public class PostmanSyncManager: IPostmanSyncManager
     /// <summary>
     /// Returns string content from the passed URL
     /// </summary>
-    private static string FetchContentString(string url)
+    private async Task<string> FetchSource(string url)
     {
-        using var webClient = new WebClient();
-        var s = webClient.DownloadString(url);
+        using var webClient = new HttpClient();
+        var response = await webClient.GetAsync(url);
+        response.EnsureSuccessStatusCode();
+        var s = await response.Content.ReadAsStringAsync();
         return s;
     }
     
