@@ -204,3 +204,5 @@ dotnet nuget push StadionHQ.PostmanSync.<VERSION>.nupkg --api-key <API_KEY> --so
 If you have an optional query parameter in an endpoint, it doesn't show up as a query parameter in the pastman request. It should by default show up as a disabled query parameter that could then be turned on. Required parameters show up correctly.
 
 https://github.com/postmanlabs/postman-app-support/issues/7301
+
+https://community.postman.com/t/parameters-from-json-openapi-3-0-schema-not-displaying-in-postman-api-documentation/19139/6
