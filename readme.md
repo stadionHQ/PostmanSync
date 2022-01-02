@@ -196,3 +196,11 @@ dotnet pack
 cd bin/Debug
 dotnet nuget push StadionHQ.PostmanSync.<VERSION>.nupkg --api-key <API_KEY> --source https://api.nuget.org/v3/index.json
 ```
+
+## Issue Tracking
+
+### Optional query parameters missing in Postman
+
+If you have an optional query parameter in an endpoint, it doesn't show up as a query parameter in the pastman request. It should by default show up as a disabled query parameter that could then be turned on. Required parameters show up correctly.
+
+https://github.com/postmanlabs/postman-app-support/issues/7301
