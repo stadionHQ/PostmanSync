@@ -1,7 +1,7 @@
 using System.Net;
 using System.Text.Json;
 using RestSharp;
-using RestSharp.Serializers.SystemTextJson;
+using RestSharp.Serializers.Json;
 using Stadion.PostmanSync.Client.Requests;
 using Stadion.PostmanSync.Client.Responses;
 
@@ -22,24 +22,20 @@ public class PostmanClient
     {
         this.apiKey = apiKey;
         this.logger = logger;
-        client = new RestClient("https://api.getpostman.com")
-        {
-            Timeout = -1
-        };
-
+        client = new RestClient("https://api.getpostman.com");
         client.UseSystemTextJson(jsonSerializerOptions);
     }
 
     #region APIs
     public async Task<IEnumerable<Api>> Get()
     {
-        var response = await MakeRequestAsync<GetApisResponse>($"apis", Method.GET);
+        var response = await MakeRequestAsync<GetApisResponse>($"apis", Method.Get);
         return response.Apis;
     }
 
     public async Task<Api> Get(Guid id)
     {
-        var response = await MakeRequestAsync<GetApiResponse>($"apis/{id}", Method.GET);
+        var response = await MakeRequestAsync<GetApiResponse>($"apis/{id}", Method.Get);
         return response.Api;
     }
 
@@ -54,7 +50,7 @@ public class PostmanClient
         UpdateApiSchemaRequest request)
     {
         return await MakeRequestAsync<UpdateSchemaResponse>(
-            $"apis/{apiId}/versions/{apiVersionId}/schemas/{schemaId}", Method.PUT, request);
+            $"apis/{apiId}/versions/{apiVersionId}/schemas/{schemaId}", Method.Put, request);
     }
     #endregion
 
@@ -68,7 +64,7 @@ public class PostmanClient
     {
         var url = $"apis/{apiId}/versions/{apiVersionId}/{entityType}/{entityId}/syncWithSchema";
         logger.LogTrace($"Sending to url: {url}");
-        return await MakeRequestAsync<SyncRelationsWithSchemaResponse>(url, Method.PUT);
+        return await MakeRequestAsync<SyncRelationsWithSchemaResponse>(url, Method.Put);
     }
     
 

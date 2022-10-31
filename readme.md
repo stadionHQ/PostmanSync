@@ -1,4 +1,5 @@
 # Postman Sync (BETA)
+
 [![Maintenance](https://img.shields.io/nuget/v/StadionHQ.PostmanSync)](https://www.nuget.org/packages/StadionHQ.PostmanSync/)
 ![example workflow](https://github.com/stadionHQ/PostmanSync/actions/workflows/dotnet.yml/badge.svg)
 
@@ -13,6 +14,7 @@ Make your changes, run your app, and test your endpoints instantly using the Pos
 - Keep your documentation and test collections in sync at all times with one simple process.
 
 ## See it in action
+
 > TODO - The GIF makes it feel much slower than normal to update. Need better frame rate
 
 ![Example](https://github.com/stadionHQ/PostmanSync/blob/main/readme/images/example-flow.gif?raw=true)
@@ -20,12 +22,15 @@ Make your changes, run your app, and test your endpoints instantly using the Pos
 ## Getting Started
 
 ### 0. Setup your solution to generate API schemas
+
 This topic is too broad to cover here. But if you use a .NET core boilerplate, then Swashbuckle will be automatically setup and a swagger.json document will be automatically generated.
 
 In our demo app, we are just using the boilerplate `WeathersController` with default configuration for Swashbuckle.
 
 ### 1. Install Postman Sync
+
 Install the [Nuget package](https://www.nuget.org/packages/StadionHQ.PostmanSync/).
+
 ```bash
 dotnet add package StadionHQ.PostmanSync
 ```
@@ -48,26 +53,29 @@ The `SourceSchema` property defines what type of schema source you are syncing t
 
 The example below specifies a [documentation collection](https://www.postman.com/stadionapis/workspace/postman-swagger-sync/collection/8423190-1d8b581d-bc6d-44c9-bccf-b604d9c5e033?ctx=documentation) relation. This collection will be automatically updated as part of the sync process. Any other possible relations will not be updated, because they have not been specified.
 
-
 ```json
 {
   "PostmanSync": {
     "PostmanApiKey": "<YOUR_POSTMAN_KEY>",
-    "Profiles": [{
-      "Key": "PostmanSyncDemo/draft/openapi3",
-      "ApiId": "acc66f3c-05a6-437c-a019-34f76b07b607",
-      "VersionId": "51713c9f-f9f0-4b5a-b447-f6a28c07c6e7",
-      "SchemaId": "f1176fe5-ddf3-4fcf-bb40-129d580ea216",
-      "Relations": [{
-        "EntityType": "documentation",
-        "EntityId": "7a889850-ae7c-440d-8a32-7266077495e6"
-      }],
-      "SourceSchema": {
-        "Type": "openapi3",
-        "Language": "json",
-        "Url": "https://localhost:7038/swagger/v1/swagger.json"
+    "Profiles": [
+      {
+        "Key": "PostmanSyncDemo/draft/openapi3",
+        "ApiId": "acc66f3c-05a6-437c-a019-34f76b07b607",
+        "VersionId": "51713c9f-f9f0-4b5a-b447-f6a28c07c6e7",
+        "SchemaId": "f1176fe5-ddf3-4fcf-bb40-129d580ea216",
+        "Relations": [
+          {
+            "EntityType": "documentation",
+            "EntityId": "7a889850-ae7c-440d-8a32-7266077495e6"
+          }
+        ],
+        "SourceSchema": {
+          "Type": "openapi3",
+          "Language": "json",
+          "Url": "https://localhost:7038/swagger/v1/swagger.json"
+        }
       }
-    }],
+    ],
     "HostedService": {
       "Enabled": "true",
       "ThrowExceptions": "false"
@@ -75,13 +83,17 @@ The example below specifies a [documentation collection](https://www.postman.com
   }
 }
 ```
+
 Note that most of these ids you can get straight from the Postman GUI. However, for the relations, you'll need to call the `https://api.getpostman.com/apis/:apiId` endpoint with your api id in order to find out the relations ids.
 
 #### Multiple profiles
+
 We've built to allow syncing multiple profiles, but in reality it's unlikely it will be needed. After all, a single API only runs in a process in .NET Core, so logically doesn't quite make sense to have multiple profiles configured. This may be removed in the future.
 
 #### Local configuration
+
 It can be beneficial to create local git ignored configuration per developer to:
+
 - Prevent the Postman api credentials being committed
 - Prevent developers overwriting each others local setup / syncing to the wrong apis / etc
 
@@ -100,6 +112,7 @@ builder.Host.ConfigureAppConfiguration((hostingContext, config) =>
 ```
 
 ### 3. Add Postman Sync to startup
+
 The following is an example using .NET 6
 
 ```c#
@@ -117,7 +130,9 @@ This runs asynchronously with the app startup. There may be a slight delay, but 
 Make changes to your API, run the app, and all configured correctly, your Postman app should be receiving updates in real time.
 
 ## How it works
+
 ### Quick overview on Postman's internal structure
+
 - In Postman, you have an **API**.
 - The API is a container for all the things you can do in Postman with your actual API.
 - The postman API will have one or more **versions**.
@@ -129,6 +144,7 @@ Make changes to your API, run the app, and all configured correctly, your Postma
   - etc
 
 ### Updating schemas
+
 - As mentioned, each version of your Postman API has a schema.
 - This schema should be a 1:1 mapping to your API in code for that particular version.
 - Postman has some features to help keep things in sync (such as syncing a `swagger.json` file from github for example)
@@ -136,19 +152,20 @@ Make changes to your API, run the app, and all configured correctly, your Postma
 - Postman Sync makes this possible, by fetching your most recently generated `swagger.json` (or other supported schema) when your app launches. It sends this to Postman to an API that you can configure, so that on each launch the Postman app is updated ~~instantly~~ extremely quickly with your newly changed or added endpoints.
 
 ### Logging
+
 You can see in your console logs the status of Postman Sync during startup.
 
 ![image-20211102120304488](readme/images/logs.png)
 
-To debug issues with PostmanSync, you can set your logging level to `trace` for extra information. 
+To debug issues with PostmanSync, you can set your logging level to `trace` for extra information.
 
 ### Exceptions
+
 Postman Sync specific exceptions will be thrown if things go wrong (such as Postman API request errors). As this is a development workflow, we think this is ok, though later may look to improve this.
 
 You'll see thes in the logs, with hopefully enough detail to diagnose what's happened. We surfacing Postman API error messages in the exception message
 
 ![image-20211102125628465](readme/images/image-20211102125628465.png)
-
 
 ## Example workflow
 
@@ -158,9 +175,11 @@ You'll see thes in the logs, with hopefully enough detail to diagnose what's hap
 - When finished, merge the fork back into the main postman collection using Postman pull requests.
 
 ## Development
+
 - You can develop PostmanSync directly against the included api `StadionHQ.PostmanSync.DevApi`
 
 ### Using nuget locally
+
 - If you'd like to develop with PostmanSync locally in your own project, you can include the project's output directory as a nuget source.
 - Find your local nuget.config file
   - On macOS, usually at at `/Users/<YOU>/.nuget/NuGet/NuGet.Config`
@@ -173,8 +192,9 @@ You'll see thes in the logs, with hopefully enough detail to diagnose what's hap
 Here's mine on macOS, for example:
 
 ```bash
-cat /Users/chrispaynter/.nuget/NuGet/NuGet.Config 
+cat /Users/chrispaynter/.nuget/NuGet/NuGet.Config
 ```
+
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
@@ -188,6 +208,7 @@ cat /Users/chrispaynter/.nuget/NuGet/NuGet.Config
 Here's some [further information](https://stackoverflow.com/a/44463578/518341) if you need help.
 
 ## Publishing
+
 From the root of the repo.
 
 ```bash
