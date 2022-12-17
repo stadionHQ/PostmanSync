@@ -1,0 +1,26 @@
+{
+  "PostmanSync": {
+    "PostmanApiKey": "PMAK-61b0cca6b73a090052c9181a-e9864f715e73c80afa19f133066038e039",
+    "Profiles": [{
+      "Key": "StoreManagementAPI_InitialBuild_OpenAPI3.0",
+      "ApiId": "acc66f3c-05a6-437c-a019-34f76b07b607",
+      "VersionId": "51713c9f-f9f0-4b5a-b447-f6a28c07c6e7",
+      "SchemaId": "f1176fe5-ddf3-4fcf-bb40-129d580ea216",
+      "Relations": [
+        {
+          "EntityType": "documentation",
+          "EntityId": "7a889850-ae7c-440d-8a32-7266077495e6"
+        }
+      ],
+      "SourceSchema": {
+        "Type": "openapi3",
+        "Language": "json",
+        "Url": "https://localhost:7038/swagger/v1/swagger.json"
+      }
+    }],
+    "HostedService": {
+      "Enabled": "true",
+      "ThrowExceptions": "false"
+    }
+  }
+}
